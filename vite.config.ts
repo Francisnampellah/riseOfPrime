@@ -19,6 +19,19 @@ export default defineConfig({
         v3_lazyRouteDiscovery: true,
       },
     }),
+    {
+      name: "remix-manifest-resolver",
+      resolveId(id) {
+        if (id === "remix:manifest") {
+          return id;
+        }
+      },
+      load(id) {
+        if (id === "remix:manifest") {
+          return "export default {}";
+        }
+      }
+    },
     tsconfigPaths(),
   ],
 });
